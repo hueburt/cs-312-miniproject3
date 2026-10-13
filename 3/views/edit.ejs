@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Edit Post</title>
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <h1>Edit Post</h1>
+  </header>
+
+  <main>
+    <section class="card">
+      <h2>Edit Post</h2>
+
+      <!-- Form prefilled with the post's current values, updates row on save -->
+      <form action="/posts/<%= post.blog_id %>/edit" method="POST" class="post-form">
+
+        <div class="form-group">
+          <label for="title">Title</label>
+          <input type="text" id="title" name="title" value="<%= post.title %>" required />
+        </div>
+
+        <div class="form-group">
+          <label for="content">Content</label>
+          <!-- Textarea contents go between the tags, not in a value attribute -->
+          <textarea id="content" name="content" rows="6" required><%= post.body %></textarea>
+        </div>
+
+        <div class="form-actions">
+          <!-- Saves the changes back to the same row in the database -->
+          <button type="submit" class="btn btn-primary">Save Changes</button>
+          <!-- Cancel goes back to the homepage without saving -->
+          <a href="/" class="btn btn-secondary">Cancel</a>
+        </div>
+      </form>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>built by Hugh for cs312</p>
+  </footer>
+</body>
+</html>

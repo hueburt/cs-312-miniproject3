@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+
+  <!-- Viewport meta tag to work on phones -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Mini Blog</title>
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+  <!-- Page header with the site title and tagline -->
+  <header class="site-header">
+    <h1>Mini Blog</h1>
+    <p>Share your thoughts with the world</p>
+
+    <!-- Nav bar: greeting and sign in/out links -->
+    <nav class="user-nav">
+      <% if (user) { %>
+        <span>Signed in as <strong><%= user.name %></strong></span>
+        <form action="/signout" method="POST" class="inline-form">
+          <button type="submit" class="btn btn-secondary">Sign Out</button>
+        </form>
+      <% } else { %>
+        <a href="/signin" class="btn btn-secondary">Sign In</a>
+        <a href="/signup" class="btn btn-primary">Sign Up</a>
+      <% } %>
+    </nav>
+  </header>
+
+  <main>
+    <!-- ============ New Post Form ============ -->
+    <% if (user) { %>
+      <section class="card">
+        <h2>Create a New Post</h2>
+
+        <!-- Submits via POST to /posts -->
+        <form action="/posts" method="POST" class="post-form">
+
+          <!-- Title field -->
+          <div class="form-group">
+            <label for="title">Blog Title</label>
+            <input type="text" id="title" name="title" placeholder="e.g. My First Post" required />
+          </div>
+
+          <!-- Content field (textarea for longer text) -->
+          <div class="form-group">
+            <label for="content">Blog Content</label>
+            <textarea id="content" name="content" rows="6" placeholder="Write your blog here..." required></textarea>
+          </div>
+
+          <button type="submit" class="btn btn-primary">Publish Post</button>
+        </form>
+      </section>
+    <% } else { %>
+      <!-- Guests must sign in before they can post -->
+      <section class="card">
+        <h2>Want to post?</h2>
+        <p class="helper-text">
+          Please <a href="/signin">sign in</a> or <a href="/signup">sign up</a> to write a new post.
+        </p>
+      </section>
+    <% } %>
+
+    <!-- ============ Post List ============ -->
+    <section class="posts-section">
+      <!-- Show how many posts exist -->
+      <h2>All Posts: (<%= posts.length %>)</h2>
+
+      <!-- If no posts, show a message -->
+      <% if (posts.length === 0) { %>
+        <p class="empty-msg">No posts yet. Be the first!</p>
+      <% } else { %>
+
+        <!-- Loop through each post, render a card for it -->
+        <% for (let i = 0; i < posts.length; i++) { %>
+          <% const post = posts[i]; %>
+
+          <article class="post-card">
+            <!-- Title -->
+            <h3><%= post.title %></h3>
+
+            <!-- Metadata: author and creation time -->
+            <div class="post-meta">
+              <span>By <%= post.creator_name %></span>
+              <span>Posted: <%= new Date(post.date_created).toLocaleString() %></span>
+            </div>
+
+            <!-- Content, escaped. line breaks are preserved by CSS's white-space -->
+            <p class="post-content"><%= post.body %></p>
+
+            <!-- Only the creator of the post can edit or delete it -->
+            <% if (user && user.user_id === post.creator_user_id) { %>
+              <div class="post-actions">
+                <!-- Edit is a plain GET link to /posts/:id/edit -->
+                <a href="/posts/<%= post.blog_id %>/edit" class="btn btn-edit">Edit</a>
+
+                <!-- Use post form for delete so url visit doesn't trigger it -->
+                <form action="/posts/<%= post.blog_id %>/delete" method="POST" class="inline-form">
+                  <button type="submit" class="btn btn-delete">Delete</button>
+                </form>
+              </div>
+            <% } %>
+          </article>
+        <% } %>
+      <% } %>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <p>built by Hugh for cs 312</p>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sign In</title>
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <h1>Sign In</h1>
+  </header>
+
+  <main>
+    <section class="card">
+      <h2>Welcome Back</h2>
+
+      <!-- Show a message if the credentials did not match -->
+      <% if (error) { %>
+        <p class="error-msg"><%= error %></p>
+      <% } %>
+
+      <!-- Submits via POST to /signin -->
+      <form action="/signin" method="POST" class="post-form">
+
+        <div class="form-group">
+          <label for="user_id">User ID</label>
+          <input type="text" id="user_id" name="user_id" required />
+        </div>
+
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" required />
+        </div>
+
+        <div class="form-actions">
+          <button type="submit" class="btn btn-primary">Sign In</button>
+          <a href="/" class="btn btn-secondary">Cancel</a>
+        </div>
+      </form>
+
+      <!-- Link over to the sign-up page -->
+      <p class="helper-text">
+        Need an account? <a href="/signup">Sign up</a>
+      </p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>built by Hugh for cs312</p>
+  </footer>
+</body>
+</html>

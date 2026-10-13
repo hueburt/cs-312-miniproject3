@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sign Up</title>
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <h1>Sign Up</h1>
+  </header>
+
+  <main>
+    <section class="card">
+      <h2>Create an Account</h2>
+
+      <!-- Show a message if the chosen user_id is already taken -->
+      <% if (error) { %>
+        <p class="error-msg"><%= error %></p>
+      <% } %>
+
+      <!-- Submits via POST to /signup -->
+      <form action="/signup" method="POST" class="post-form">
+
+        <div class="form-group">
+          <label for="user_id">User ID</label>
+          <input type="text" id="user_id" name="user_id" placeholder="e.g. janedoe" required />
+        </div>
+
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" required />
+        </div>
+
+        <div class="form-group">
+          <label for="name">Display Name</label>
+          <input type="text" id="name" name="name" placeholder="e.g. Jane Doe" required />
+        </div>
+
+        <div class="form-actions">
+          <button type="submit" class="btn btn-primary">Sign Up</button>
+          <a href="/" class="btn btn-secondary">Cancel</a>
+        </div>
+      </form>
+
+      <!-- Link over to the sign-in page -->
+      <p class="helper-text">
+        Already have an account? <a href="/signin">Sign in</a>
+      </p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>built by Hugh for cs312</p>
+  </footer>
+</body>
+</html>

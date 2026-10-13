@@ -1,0 +1,262 @@
+/* Reset default margins/padding
+Use border-box sizing*/
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Base page styling. Flex column layout 
+Footer sits at the bottom even when theres little content*/
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background: #f4f6f8;
+  color: #333;
+  line-height: 1.5;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Main content wrapper: centered, capped 800px wide, grows to push footer down */
+main {
+  width: 90%;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px 0;
+  flex: 1;
+}
+
+/* ---------- Header ---------- */
+
+.site-header {
+  background: #4f46e5;
+  color: #fff;
+  text-align: center;
+  padding: 24px 16px;
+}
+
+.site-header h1 {
+  font-size: 28px;
+  margin-bottom: 6px;
+}
+
+.site-header p {
+  font-size: 14px;
+  opacity: 0.9;
+}
+
+/* ---------- Cards ---------- */
+
+/* Reusable card for the form and post panels */
+.card {
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+  margin-bottom: 24px;
+}
+
+.card h2 {
+  color: #4f46e5;
+  font-size: 20px;
+  margin-bottom: 14px;
+}
+
+/* ---------- Forms ---------- */
+
+/* Each label + input pair stacked vertically */
+.form-group {
+  margin-bottom: 14px;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  font-weight: bold;
+  font-size: 14px;
+  margin-bottom: 6px;
+}
+
+.form-group input,
+.form-group textarea {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 15px;
+  font-family: inherit;
+}
+
+/* Highlight the focused field with colour */
+.form-group input:focus,
+.form-group textarea:focus {
+  border-color: #4f46e5;
+  outline: none;
+}
+
+/* Btton rpw  wraps on narrow screens */
+.form-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+/* ---------- Buttons ---------- */
+
+.btn {
+  display: inline-block;
+  padding: 9px 16px;
+  border: none;
+  border-radius: 5px;
+  font-size: 14px;
+  cursor: pointer;
+  text-decoration: none;
+  text-align: center;
+}
+
+.btn:hover {
+  opacity: 0.9;
+}
+
+/* Colour variants */
+.btn-primary   { background: #4f46e5; color: #fff; }
+.btn-edit      { background: #0ea5e9; color: #fff; }
+.btn-delete    { background: #ef4444; color: #fff; }
+.btn-secondary { background: #e5e7eb; color: #333; }
+
+/* ---------- Post list ---------- */
+
+.posts-section h2 {
+  font-size: 20px;
+  margin-bottom: 14px;
+}
+
+/* Message shown when there are no posts yet */
+.empty-msg {
+  text-align: center;
+  color: #888;
+  padding: 24px;
+  background: #fff;
+  border-radius: 8px;
+}
+
+/* Individual post card with a coloured left border */
+.post-card {
+  background: #fff;
+  padding: 18px 20px;
+  border-radius: 8px;
+  border-left: 4px solid #4f46e5;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+  margin-bottom: 16px;
+}
+
+.post-card h3 {
+  color: #1e1b4b;
+  font-size: 18px;
+  margin-bottom: 6px;
+  /* Break long words so they don't overflow the card */
+  word-wrap: break-word;
+}
+
+/* Small row of metadata "author, dates" */
+.post-meta {
+  font-size: 13px;
+  color: #666;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-bottom: 10px;
+}
+
+/* Post body. \
+pre-wrap preserves line breaks and spacing from the text area */
+.post-content {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  margin-bottom: 14px;
+}
+
+/* Buttons below each post */
+.post-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+/* Makes the delete <form> sit inline with the edit link */
+.inline-form {
+  display: inline;
+}
+
+/* ---------- Footer ---------- */
+
+.site-footer {
+  background: #1e1b4b;
+  color: #c7d2fe;
+  text-align: center;
+  padding: 14px;
+  font-size: 13px;
+}
+
+/* ---------- Mobile ---------- */
+
+/* Below 600px wide: shrink header make buttons full-width
+Stack button rows vertically */
+@media (max-width: 600px) {
+  .site-header h1 { font-size: 22px; }
+
+  .btn {
+    width: 100%;
+  }
+
+  .post-actions,
+  .form-actions {
+    flex-direction: column;
+  }
+}
+
+/* ---------- Mini-Project-3 ---------- */
+
+/* Row of greeting + sign in/out buttons inside the header */
+.user-nav {
+  margin-top: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+/* Error message shown on the signup/signin pages */
+.error-msg {
+  background: #fee2e2;
+  color: #b91c1c;
+  border: 1px solid #fecaca;
+  border-radius: 5px;
+  padding: 10px 14px;
+  font-size: 14px;
+  margin-bottom: 14px;
+}
+
+/* Small helper line under signup/signin forms */
+.helper-text {
+  margin-top: 14px;
+  font-size: 14px;
+  color: #555;
+}
+
+.helper-text a {
+  color: #4f46e5;
+  text-decoration: none;
+}
+
+.helper-text a:hover {
+  text-decoration: underline;
+}
+
+/* In mobile: also stack the header nav */
+@media (max-width: 600px) {
+  .user-nav {
+    flex-direction: column;
+  }
+}
